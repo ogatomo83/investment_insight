@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Your Stocks</h1>
+  
+  <% @stocks.each do |stock| %>
+    <p><%= stock.ticker_symbol %></p>
+  <% end %>
+  <%= link_to 'edit', edit_stocks_stocks_path, class: 'btn btn-primary' %>
+</div>

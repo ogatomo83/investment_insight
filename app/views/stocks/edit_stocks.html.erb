@@ -1,0 +1,23 @@
+<%= form_with url: save_edited_stocks_stocks_path do |f| %>
+  <table>
+    <% @stocks.each_with_index do |stock, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= text_field_tag "stock[#{index}][ticker_symbol]", stock.ticker_symbol, placeholder: '-', size: 4 %></td>
+        <td><%= link_to 'detail', stock_detail_stocks_path(stock) %></td>
+        <td><button type="button" onclick="editStock(this)">edit</button></td>
+        <td><button type="button" onclick="deleteStock(this)">delete</button></td>
+      </tr>
+    <% end %>
+    <% (15 - @stocks.count).times do |i| %>
+      <tr>
+        <td><%= i + @stocks.count + 1 %></td>
+        <td><%= text_field_tag "stock[#{i + @stocks.count}][ticker_symbol]", '', placeholder: '-', size: 4, disabled: true %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </table>
+  <%= f.submit "SAVE" %>
+<% end %>
