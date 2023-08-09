@@ -2,7 +2,9 @@
   <h1>Your Stocks</h1>
   
   <% @stocks.each do |stock| %>
-    <p><%= stock.ticker_symbol %></p>
+    <div class="ticker-symbol">
+      <%= stock.ticker_symbol %> <!-- この部分を更新 -->
+    </div>
   <% end %>
   <%= link_to 'edit', edit_stocks_stocks_path, class: 'btn btn-primary' %>
 </div>

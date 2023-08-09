@@ -1,0 +1,44 @@
+<h1><%= @stock.ticker_symbol %></h1>
+
+<div class="financial-report">
+  <label>Year:</label> <%= @financial_report.year %>
+  <label>Quarter:</label>
+  <%= select_tag :quarter, options_for_select([['Q1', 1], ['Q2', 2], ['Q3', 3], ['Q4', 4]], @financial_report.quarter) %>
+
+  <table>
+    <tr>
+      <td></td>
+      <td>Estimate</td>
+      <td>Actual</td>
+      <td>Result</td>
+    </tr>
+    <tr>
+      <td>EPS</td>
+      <td><%= @financial_report.eps_estimate %></td>
+      <td><%= @financial_report.eps_actual %></td>
+      <td><%= estimate_vs_actual(@financial_report.eps_estimate, @financial_report.eps_actual) %></td>
+    </tr>
+    <tr>
+      <td>Revenue</td>
+      <td><%= @financial_report.revenue_estimate %></td>
+      <td><%= @financial_report.revenue_actual %></td>
+      <td><%= estimate_vs_actual(@financial_report.revenue_estimate, @financial_report.revenue_actual) %></td>
+    </tr>
+    <tr>
+      <td>Guidance (EPS)</td>
+      <td><%= @financial_report.eps_guidance_estimate %></td>
+      <td><%= @financial_report.eps_guidance_actual %></td>
+      <td><%= estimate_vs_actual(@financial_report.eps_guidance_estimate, @financial_report.eps_guidance_actual) %></td>
+    </tr>
+    <tr>
+      <td>Guidance (Revenue)</td>
+      <td><%= @financial_report.revenue_guidance_estimate %></td>
+      <td><%= @financial_report.revenue_guidance_actual %></td>
+      <td><%= estimate_vs_actual(@financial_report.revenue_guidance_estimate, @financial_report.revenue_guidance_actual) %></td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <%= link_to 'Edit', edit_stock_financial_report_path(@stock, @financial_report), class: 'btn btn-primary' %>
+</div>

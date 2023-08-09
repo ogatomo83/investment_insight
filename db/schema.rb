@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_03_074423) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_08_034504) do
+  create_table "financial_reports", charset: "latin1", force: :cascade do |t|
+    t.bigint "stock_id", null: false
+    t.integer "year"
+    t.integer "quarter"
+    t.decimal "eps_estimate", precision: 10
+    t.decimal "eps_actual", precision: 10
+    t.decimal "revenue_estimate", precision: 10
+    t.decimal "revenue_actual", precision: 10
+    t.decimal "eps_guidance_estimate", precision: 10
+    t.decimal "eps_guidance_actual", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "revenue_guidance_estimate", precision: 10
+    t.decimal "revenue_guidance_actual", precision: 10
+    t.index ["stock_id"], name: "index_financial_reports_on_stock_id"
+  end
+
   create_table "stocks", charset: "latin1", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "ticker_symbol"
@@ -31,5 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_03_074423) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "financial_reports", "stocks"
   add_foreign_key "stocks", "users"
 end

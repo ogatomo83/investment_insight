@@ -1,0 +1,41 @@
+<h1><%= @stock.ticker_symbol %> - New Financial Report</h1>
+
+<%= form_with model: [@stock, @financial_report], url: stock_financial_reports_path(@stock), method: :post, local: true do |f| %>
+  <div class="financial-report">
+    <label>Year:</label> <%= f.number_field :year %>
+    <label>Quarter:</label>
+    <%= f.select :quarter, options_for_select([['Q1', 1], ['Q2', 2], ['Q3', 3], ['Q4', 4]]) %>
+
+    <table>
+      <tr>
+        <td></td>
+        <td>Estimate</td>
+        <td>Actual</td>
+      </tr>
+      <tr>
+        <td>EPS</td>
+        <td><%= f.text_field :eps_estimate %></td>
+        <td><%= f.text_field :eps_actual %></td>
+      </tr>
+      <tr>
+        <td>Revenue</td>
+        <td><%= f.text_field :revenue_estimate %></td>
+        <td><%= f.text_field :revenue_actual %></td>
+      </tr>
+      <tr>
+        <td>Guidance (EPS)</td>
+        <td><%= f.text_field :eps_guidance_estimate %></td>
+        <td><%= f.text_field :eps_guidance_actual %></td>
+      </tr>
+      <tr>
+        <td>Guidance (Revenue)</td>
+        <td><%= f.text_field :revenue_guidance_estimate %></td>
+        <td><%= f.text_field :revenue_guidance_actual %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div>
+    <%= f.submit 'Create', class: 'btn btn-primary' %>
+  </div>
+<% end %>

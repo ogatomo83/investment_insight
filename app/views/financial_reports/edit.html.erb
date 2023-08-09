@@ -1,0 +1,41 @@
+<h1>Edit Financial Report for <%= @stock.ticker_symbol %></h1>
+
+<%= form_with(model: [@stock, @financial_report]) do |f| %>
+  <div class="financial-report">
+    <label>Year:</label> <%= f.text_field :year %>
+
+    <label>Quarter:</label>
+    <%= f.select :quarter, options_for_select([['Q1', 1], ['Q2', 2], ['Q3', 3], ['Q4', 4]], @financial_report.quarter) %>
+
+    <table>
+      <tr>
+        <td></td>
+        <td>Estimate</td>
+        <td>Actual</td>
+      </tr>
+      <tr>
+        <td>EPS</td>
+        <td><%= f.text_field :eps_estimate %></td>
+        <td><%= f.text_field :eps_actual %></td>
+      </tr>
+      <tr>
+        <td>Revenue</td>
+        <td><%= f.text_field :revenue_estimate %></td>
+        <td><%= f.text_field :revenue_actual %></td>
+      </tr>
+      <tr>
+        <td>Guidance (EPS)</td>
+        <td><%= f.text_field :eps_guidance_estimate %></td>
+        <td><%= f.text_field :eps_guidance_actual %></td>
+      </tr>
+      <tr>
+        <td>Guidance (Revenue)</td>
+        <td><%= f.text_field :revenue_guidance_estimate %></td>
+        <td><%= f.text_field :revenue_guidance_actual %></td>
+      </tr>
+    </table>
+
+    <%= f.submit "Save", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+

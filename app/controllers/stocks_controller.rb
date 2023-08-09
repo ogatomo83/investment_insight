@@ -1,5 +1,5 @@
 class StocksController < ApplicationController
-  before_action :authenticate_user! # 追加：ユーザーがログインしていることを確認する
+  before_action :authenticate_user! # ユーザーがログインしていることを確認する
 
   def index
     @stocks = current_user.stocks
@@ -25,12 +25,31 @@ class StocksController < ApplicationController
     @stocks = current_user.stocks
   end
   
-  def save_edited_stocks
-    # ここでティッカーシンボルの保存や編集、削除のロジックを実装
+  def show
+    @stock = Stock.find(params[:stock_id])
+    @financial_report = @stock.financial_reports.find(params[:id])
   end
   
-  def stock_detail
-    @stock = Stock.find(params[:id])
+  def save_edited_stocks
+  end
+
+  def edit
+    @stock = current_user.stocks.find(params[:id])
+  end
+  
+  def update
+    @stock = current_user.stocks.find(params[:id])
+    if @stock.update(stock_params)
+      redirect_to edit_stocks_stocks_path, notice: 'ティッカーシンボルを更新しました。'
+    else
+      render :edit
+    end
+  end
+  
+  private
+  
+  def stock_params
+    params.require(:stock).permit(:ticker_symbol)
   end
 
 

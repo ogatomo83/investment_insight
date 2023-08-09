@@ -1,4 +1,5 @@
 class Stock < ApplicationRecord
+  has_many :financial_reports
   # Association
   belongs_to :user
 

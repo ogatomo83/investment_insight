@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stock: one
+  year: 1
+  quarter: 1
+  eps_estimate: 9.99
+  eps_actual: 9.99
+  revenue_estimate: 9.99
+  revenue_actual: 9.99
+  eps_guidance_estimate: 9.99
+  eps_guidance_actual: 9.99
+
+two:
+  stock: two
+  year: 1
+  quarter: 1
+  eps_estimate: 9.99
+  eps_actual: 9.99
+  revenue_estimate: 9.99
+  revenue_actual: 9.99
+  eps_guidance_estimate: 9.99
+  eps_guidance_actual: 9.99

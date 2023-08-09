@@ -4,8 +4,16 @@
       <tr>
         <td><%= index + 1 %></td>
         <td><%= text_field_tag "stock[#{index}][ticker_symbol]", stock.ticker_symbol, placeholder: '-', size: 4 %></td>
-        <td><%= link_to 'detail', stock_detail_stocks_path(stock) %></td>
-        <td><button type="button" onclick="editStock(this)">edit</button></td>
+        
+        <td>
+          <% if stock.financial_reports.any? %>
+            <%= link_to 'detail', stock_financial_report_path(stock, stock.financial_reports.last) %>
+          <% else %>
+            <%= link_to 'No reports available', new_stock_financial_report_path(stock) %>
+          <% end %>
+        </td>
+        
+        <td><%= link_to 'edit', edit_individual_stock_path(stock) %></td>
         <td><button type="button" onclick="deleteStock(this)">delete</button></td>
       </tr>
     <% end %>

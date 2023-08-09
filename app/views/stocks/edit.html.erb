@@ -1,0 +1,9 @@
+<%= form_with(model: @stock, url: stock_path(@stock), method: :patch) do |f| %>
+  <div>
+    <%= f.label :ticker_symbol, "ティッカーシンボル" %>
+    <%= f.text_field :ticker_symbol %>
+  </div>
+  <div>
+    <%= f.submit "更新" %>
+  </div>
+<% end %>
