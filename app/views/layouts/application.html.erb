@@ -7,35 +7,60 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <!-- Style追加 -->
-    <%= stylesheet_link_tag 'application', media: 'all' %>
     <link rel="stylesheet" href="<%= mix('/css/app.css') %>">
     <!-- Javascript -->
     <script src="<%= mix('/js/bootstrap.js') %>"></script>
   </head>
 
   <body>
-    <% if user_signed_in? %>
-            <!-- ログインしている場合に表示されます -->
-            <!-- user_signed_in? は device が提供している認証済みかを判定するメソッドです -->
-            <li>
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
-            </li>
-            <li>
-              <%= link_to "保有銘柄", "/stocks", class: "nav-link" %>
-            </li>
-            <li>
-              <%= link_to "銘柄追加", new_post_path, class: "nav-link" %>
-            </li>
-          <% else %>
-            <!-- ログインしていない場合に表示されます -->
-            <!-- else 以降は前述のif文の否定になります -->
-            <li>
-              <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
-            </li>
-            <li>
-              <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
-            </li>
-          <% end %>
-    <%= yield %>
+    <div class="main-container">
+    <!--  ナビゲーションバー -->
+      <nav class="custom-navbar">
+        <div id="menuToggle">
+          <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+          <ul id="menu">
+            <% if user_signed_in? %>
+              <!-- ログインしている場合に表示されます -->
+              <!-- user_signed_in? は device が提供している認証済みかを判定するメソッドです -->
+              <li>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              </li>
+              <li>
+                <%= link_to "保有銘柄", "/stocks", class: "nav-link" %>
+              </li>
+              <li>
+                <%= link_to "銘柄追加", new_post_path, class: "nav-link" %>
+              </li>
+            <% else %>
+              <!-- ログインしていない場合に表示されます -->
+              <!-- else 以降は前述のif文の否定になります -->
+              <li>
+                <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+              </li>
+              <li>
+                <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+      <% if notice %>
+        <div class="alert alert-success" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="alert alert-danger" role="alert">
+          <%= alert %>
+        </div>
+      <% end %>
+  
+      <div class="bg-white text-dark">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
